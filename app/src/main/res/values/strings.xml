@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">E03List_1</string>
+    <string name="action_remove">삭제</string>
 </resources>
