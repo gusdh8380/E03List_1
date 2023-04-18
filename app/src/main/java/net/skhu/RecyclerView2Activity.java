@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 
+import androidx.appcompat.app.AlertDialog;
+import android.content.DialogInterface;
+
 public class RecyclerView2Activity extends AppCompatActivity {
     RecyclerView2Adapter recyclerView2Adapter;
     ArrayList<Memo2> arrayList;
@@ -57,11 +60,26 @@ public class RecyclerView2Activity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_remove) {
-            Iterator<Memo2> iterator = arrayList.iterator();
-            while (iterator.hasNext()) if (iterator.next().isChecked()) iterator.remove();
-            recyclerView2Adapter.notifyDataSetChanged();
+            removeMemo();
             return true;
-
-            return super.onOptionsItemSelected(item);
         }
+        return super.onOptionsItemSelected(item);
     }
+
+    private void removeMemo() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.confirm);
+        builder.setMessage(R.string.doYouWantToDelete);
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int index) {
+                Iterator<Memo2> iterator = arrayList.iterator();
+                while (iterator.hasNext()) if (iterator.next().isChecked()) iterator.remove();
+                recyclerView2Adapter.notifyDataSetChanged();
+            }
+        });
+        builder.setNegativeButton(R.string.no, null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+}
