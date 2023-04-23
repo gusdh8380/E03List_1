@@ -29,14 +29,17 @@ public class RecyclerView2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_view2);
         arrayList = new ArrayList<Memo2>();
+
         arrayList.add(new Memo2("one", new Date()));
         arrayList.add(new Memo2("two", new Date()));
+
         recyclerView2Adapter = new RecyclerView2Adapter(this, arrayList);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(recyclerView2Adapter);
+
         Button b = (Button) findViewById(R.id.btnAdd);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
